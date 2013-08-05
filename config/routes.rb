@@ -1,7 +1,10 @@
 Auth2::Application.routes.draw do
   resources :articles
 
+  match "/auth/:provider/callback" => "sessions#create"
+  match "/signout" => "sessions#destroy", :as => :signout
 
+  root :to => "articles#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

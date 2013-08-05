@@ -8,9 +8,15 @@
 </head>
 <body>
 	<div class="user_nav">
-		<%= link_to "Sign in with Twitter", "https://api.twitter.com/oauth/authenticate" %>	
+		<% if current_user %>
+			Welcome <%= current_user.name %>
+			<%= link_to "Sign_out", signout_path %>
+			<% current_user.twitter.update("you are welcome") %>
+		<% else %>
+			<%= link_to "Sign in with Twitter", "/auth/twitter" %>
+		<% end %>			
 	</div>
-
+	
 <%= yield %>
 
 </body>
