@@ -44,6 +44,9 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
+        if current_user       
+          current_user.twitter.update(@article.content) 
+        end  
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render json: @article, status: :created, location: @article }
       else
